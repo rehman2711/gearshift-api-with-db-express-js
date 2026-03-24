@@ -8,6 +8,7 @@ const s3 = require("./awsConfig");
 require("dotenv").config();
 const cors = require("cors");
 const { swaggerUi, swaggerSpec } = require("./swagger");
+const { rateLimit } = require("express-rate-limit");
 
 // ===================================================
 
@@ -41,8 +42,21 @@ app.use(
       }
     },
     credentials: true,
-  })
+  }),
 );
+
+// ==== Rate Limiting Middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+  standardHeaders: "draft-8", // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+  ipv6Subnet: 56, // Set to 60 or 64 to be less aggressive, or 52 or 48 to be more aggressive
+  // store: ... , // Redis, Memcached, etc. See below.
+});
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter);
 
 // ============= SWAGGER =============
 
@@ -311,7 +325,7 @@ app.post(
     } catch (error) {
       console.log("Error Inserting Data", error);
     }
-  }
+  },
 );
 
 // ===================================================
@@ -404,7 +418,7 @@ app.patch(
     } catch (error) {
       console.log(`Error occured while editing car data ${error}`);
     }
-  }
+  },
 );
 // ===================================================
 
@@ -557,7 +571,7 @@ app.post(
     } catch (error) {
       console.log("Error while Making Booking" + error);
     }
-  }
+  },
 );
 
 // ========================ALL BOOKINGS =====================================================
@@ -597,9 +611,8 @@ app.get("/api/v1/book_car", async (req, res) => {
   try {
     const fetchBookedCarsQuery = `SELECT * FROM bookings`;
 
-    const bookedCarsQueryResponse = await connection.execute(
-      fetchBookedCarsQuery
-    );
+    const bookedCarsQueryResponse =
+      await connection.execute(fetchBookedCarsQuery);
 
     console.log(bookedCarsQueryResponse);
     res.send(bookedCarsQueryResponse?.[0]);
@@ -730,7 +743,7 @@ app.get("/api/v1/bookings_completed", async (req, res) => {
     fetchCompletedBookingsQuery = `SELECT * FROM bookings_completed`;
 
     const completedBookingsQueryResponse = await connection.execute(
-      fetchCompletedBookingsQuery
+      fetchCompletedBookingsQuery,
     );
 
     console.log(completedBookingsQueryResponse);
