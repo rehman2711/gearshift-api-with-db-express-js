@@ -58,7 +58,7 @@ const db = mysql.createPool({
 // `;
 
 // Test DB connection + create table
-async function initDatabase() {
+(async () => {
   try {
     const connection = await db.getConnection();
     console.log("✅ MySQL connected successfully!");
@@ -75,8 +75,6 @@ async function initDatabase() {
   } catch (error) {
     console.error("❌ MySQL initialization failed:", error.message);
   }
-}
-
-initDatabase();
+})();
 
 module.exports = db;
