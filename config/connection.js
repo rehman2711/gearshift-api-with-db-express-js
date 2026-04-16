@@ -61,19 +61,19 @@ const db = mysql.createPool({
 (async () => {
   try {
     const connection = await db.getConnection();
-    console.log("✅ MySQL connected successfully!");
+    console.log(" ||=== MySQL connected successfully ===||");
 
     // Create cars table
     // await connection.query(createCarsTableQuery);
-    // console.log("✅ 'cars' table is ready!");
+    // console.log("||=== 'cars' table is ready ===||");
 
     // Create bookings table
     // await connection.query(createBookingsTableQuery);
-    // console.log("✅ 'bookings' table is ready!");
+    // console.log("||=== 'bookings' table is ready ===||");
 
     connection.release();
   } catch (error) {
-    console.error("❌ MySQL initialization failed:", error.message);
+    console.error("===|| MySQL initialization failed ||=== ", error.message);
   }
 })();
 

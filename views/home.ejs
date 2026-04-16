@@ -1,26 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gearshift Rentals</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Gearshift - Interactive Showroom</title>
+
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+    }
+  </style>
 </head>
-<body class="font-[Poppins] bg-[#0d0d11] text-white">
 
-<header class="flex justify-between items-center px-14 py-6 bg-white/5 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
-  <div class="text-3xl font-bold text-[#e94560] tracking-wide">Gearshift</div>
-  <nav class="space-x-8 text-lg">
-    <a class="hover:text-[#e94560] transition" href="/api/v1/all-cars">Fetch_Data</a>
-  </nav>
-</header>
+<body class="bg-white text-black min-h-screen flex flex-col">
 
-<section class="flex items-center justify-center min-h-[calc(100vh-96px)] px-4 text-center">
-  <div>
-    <h1 class="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-white to-[#e94560] bg-clip-text text-transparent">Welcome to Gearshift</h1>
-    <p class="text-xl md:text-2xl opacity-70 mt-4">Your journey begins here.</p>
-  </div>
-</section>
+  <header class="w-full bg-white">
+    <div class="max-w-7xl mx-auto my-auto flex justify-between items-center px-6 py-5">
+
+      <h1 class="text-3xl font-extrabold tracking-tight leading-none">
+        GEARSHIFT
+        <span class="text-yellow-500 inline-block align-bottom translate-y-[4px]">
+          &#9642;
+        </span>
+      </h1>
+
+      <nav class="hidden md:flex gap-8 text-base font-medium">
+
+        <!-- 1 -->
+        <a href="/api/v1/all-cars" target="_blank"
+          class="text-semibold px-4 py-2 hover:bg-neutral-100 transition duration-300">
+          <span class="mx-1 text-green-400 font-black">/</span>
+          <span class="text-neutral-700">all-cars</span>
+        </a>
+
+        <!-- 2 -->
+        <a href="/api/v1/single-car/1" target="_blank"
+          class="text-semibold px-4 py-2 hover:bg-neutral-100 transition duration-300">
+          <span class="mx-1 text-green-400 font-black">/</span>
+          <span class="text-neutral-700">single-car</span>
+        </a>
+
+        <!-- 3 -->
+        <a href="/api/v1/all-non-approved-bookings" target="_blank"
+          class="text-semibold px-4 py-2 hover:bg-neutral-100 transition duration-300">
+          <span class="mx-1 text-green-400 font-black">/</span>
+          <span class="text-neutral-700">all-non-approved-bookings</span>
+        </a>
+
+        <!-- 4 -->
+        <a href="/api/v1/all-approved-bookings" target="_blank"
+          class="text-semibold px-4 py-2 hover:bg-neutral-100 transition duration-300">
+          <span class="mx-1 text-green-400 font-black">/</span>
+          <span class="text-neutral-700">all-approved-bookings</span>
+        </a>
+
+
+
+      </nav>
+
+      <div class="flex gap-3">
+        <a href="https://github.com/rehman2711/gearshift-backend-api-with-db-and-express-js.git" target="_blank"
+          class="px-4 py-2 text-sm font-medium bg-black text-white hover:bg-black/80 transition">
+          GITHUB
+        </a>
+
+        <a href="https://gearshift-api-latest.onrender.com/gearshift-api-docs/" target="_blank"
+          class="px-5 py-2 text-sm font-medium bg-yellow-400 text-black hover:bg-yellow-500/90 transition">
+          SWAGGER UI
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-6">
+    <div class="max-w-4xl mx-auto text-center">
+
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+        Gearshift API .
+        <br />
+        <span class="bg-yellow-400 text-black px-4 py-1 inline-block mt-3">
+          Made With Express Js .
+        </span>
+        <br />
+        DB Supported .
+      </h1>
+
+      <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Access, manage, and control car rental data through structured REST APIs —
+        including cars, bookings, and approval workflows .
+      </p>
+
+      <div class="mt-10 flex justify-center gap-4 flex-wrap">
+
+        <!-- GitHub -->
+        <a href="https://github.com/rehman2711/gearshift-backend-api-with-db-and-express-js.git" target="_blank"
+          class="px-7 py-3 font-medium bg-black text-white hover:bg-black/80 transition group flex items-center gap-2">
+
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 
+      0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756 
+      -1.087-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 
+      1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.76-1.605 
+      -2.665-.305-5.466-1.332-5.466-5.93 
+      0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 
+      0 0 1.005-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.045.138 3.003.404 
+      2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176 
+      .765.84 1.23 1.91 1.23 3.22 
+      0 4.61-2.805 5.625-5.475 5.922 
+      .435.375.81 1.102.81 2.222 
+      0 1.606-.015 2.896-.015 3.286 
+      0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12 
+      24 5.37 18.63 0 12 0z" />
+          </svg>
+
+          Github
+
+          <span class="inline-block transform transition-transform group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </a>
+
+        <!-- Swagger -->
+        <a href="https://gearshift-api-latest.onrender.com/gearshift-api-docs/"
+          class="px-7 py-3 font-medium bg-yellow-400 text-black hover:bg-yellow-500/90 transition group flex items-center gap-2">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-7 h-7">
+            <circle cx="256" cy="256" r="240" fill="yellow" opacity="0.1" />
+
+            <path d="M190 140
+           C150 140 150 180 150 210
+           L150 230
+           C150 250 140 260 120 260
+           C140 260 150 270 150 290
+           L150 310
+           C150 340 150 380 190 380" fill="none" stroke="currentColor" stroke-width="28" stroke-linecap="round" />
+
+            <path d="M322 140
+           C362 140 362 180 362 210
+           L362 230
+           C362 250 372 260 392 260
+           C372 260 362 270 362 290
+           L362 310
+           C362 340 362 380 322 380" fill="none" stroke="currentColor" stroke-width="28" stroke-linecap="round" />
+
+            <circle cx="210" cy="260" r="18" fill="currentColor" />
+            <circle cx="256" cy="260" r="18" fill="currentColor" />
+            <circle cx="302" cy="260" r="18" fill="currentColor" />
+          </svg>
+
+          Swagger UI
+
+          <span class="inline-block transform transition-transform group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </a>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-white">
+    <div
+      class="max-w-7xl mx-auto px-8 md:px-10 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <p>© <%= new Date().getFullYear() %> Gearshift Rentals</p>
+
+      <div class="flex gap-8">
+        <a href="#"
+          class="px-4 py-2 hover:text-yellow-400 hover:bg-black hover:underline underline-offset-4 transition-all duration-200">
+          Privacy
+        </a>
+        <a href="#"
+          class="px-4 py-2 hover:text-yellow-400 hover:bg-black hover:underline underline-offset-4 transition-all duration-200">
+          Terms
+        </a>
+      </div>
+    </div>
+  </footer>
 
 </body>
+
 </html>
